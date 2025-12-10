@@ -33,18 +33,15 @@ function clearInputs() {
     const selects = document.querySelectorAll('select');
     selects.forEach(select => {
         Array.from(select.options).forEach(option => {
-            // Mengatur ulang default select (PEP 8 & PEP 257)
-            option.selected = (option.value === 'PEP 8' || option.value === 'PEP 257');
+            // PERUBAHAN DI SINI: Semua opsi disetel ke false (tidak dipilih)
+            option.selected = false;
         });
     });
     
-    // START PERUBAHAN: Membersihkan kedua Prompt Final
     document.getElementById('resultID').value = '';
     document.getElementById('resultEN').value = '';
-    // END PERUBAHAN
     
     showToast("❌ Semua input dan output telah dibersihkan!");
-    // generatePrompt() tidak perlu dipanggil di sini, karena tujuannya membersihkan.
 }
 
 // Fungsi BARU: Mengunduh konten textarea sebagai file .txt
