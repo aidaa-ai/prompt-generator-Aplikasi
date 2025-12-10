@@ -75,18 +75,29 @@ textarea.input-field {
 
 
 /* BUTTONS */
-#generate-button {
-    display: block;
+/* GAYA GRID BARU UNTUK TOMBOL UTAMA */
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Kolom dengan lebar sama */
+    gap: 10px; 
+    margin-top: 20px; /* Tambahkan jarak dari input di atas */
+    margin-bottom: 20px; 
+}
+
+/* Mengatur gaya tombol di dalam grid agar mengisi penuh kolom */
+.button-grid button {
     width: 100%;
     padding: 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
     border-radius: 5px;
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-bottom: 10px;
+    border: none;
+}
+
+#generate-button {
+    background-color: #28a745;
+    color: white;
 }
 
 #generate-button:hover {
@@ -147,7 +158,7 @@ textarea.input-field {
     background-color: #5a6268;
 }
 
-.secondary { /* Untuk tombol Clear Inputs */
+.secondary { /* Untuk tombol Clear Inputs di button-grid dan action-buttons (agar konsisten) */
     background-color: #dc3545; /* Merah untuk Clear/Delete */
     color: white;
 }
@@ -168,7 +179,7 @@ textarea.input-field {
 
 /* Responsiveness */
 @media (max-width: 768px) {
-    .input-grid, .output-grid {
+    .input-grid, .output-grid, .button-grid {
         grid-template-columns: 1fr; /* Satu kolom di perangkat kecil */
     }
     .input-column {
