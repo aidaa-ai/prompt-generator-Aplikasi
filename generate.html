@@ -2,84 +2,110 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Prompt Generator AI - Aplikasi Ringkas</title>
+    <title>Prompt Generator AI - Versi Ringkas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body onload="generatePrompt()">
-    <h1>✨ Prompt Generator AI - Aplikasi Ringkas</h1>
-    <p>Masukkan detail aplikasi Anda di bawah ini. Prompt akan dibuat sesuai struktur baru.</p>
+    
+    <div class="container">
+        <h1>✨ Prompt Generator AI</h1>
+        <p>Masukkan detail aplikasi Anda. Prompt akan dibuat sesuai struktur yang efektif.</p>
 
-    <form id="promptForm">
-        <div class="col-group">
-            
-            <div><label>1. Persona</label>
-            <textarea id="persona" class="input-field" placeholder="programmer senior dan analis handal"></textarea></div>
+        <form id="promptForm">
+            <div class="input-grid">
+                <div class="input-column">
+                    <div class="input-group">
+                        <label>1. Persona</label>
+                        <textarea id="persona" class="input-field" placeholder="programmer senior dan analis handal"></textarea>
+                    </div>
 
-            <div><label>2. Nama Aplikasi</label>
-            <input id="namaAplikasi" placeholder="Register Surat"></div>
+                    <div class="input-group">
+                        <label>2. Nama Aplikasi</label>
+                        <input id="namaAplikasi" type="text" placeholder="Register Surat">
+                    </div>
 
-            <div><label>3. Platform</label>
-            <input id="platform" placeholder="Google Sheets"></div>
+                    <div class="input-group">
+                        <label>3. Platform</label>
+                        <input id="platform" type="text" placeholder="Google Sheets">
+                    </div>
 
-            <div><label>4. Peran/Instansi Pengguna</label>
-            <textarea id="peranInstansi" class="input-field" placeholder="staf administrasi di instansi pemerintah"></textarea></div>
+                    <div class="input-group">
+                        <label>4. Peran/Instansi Pengguna</label>
+                        <textarea id="peranInstansi" class="input-field" placeholder="staf administrasi di instansi pemerintah"></textarea>
+                    </div>
 
-            <div><label>5. Tujuan Utama Aplikasi</label>
-            <textarea id="tujuan" class="input-field" placeholder="mencatat surat masuk/keluar dengan data rapi"></textarea></div>
-            
-            <div class="output-area">
-                <label for="resultID">Prompt Final (Indonesia)</label>
-                <textarea id="resultID" class="mono" rows="12" placeholder="Hasil akan muncul di sini..."></textarea>
-                <div class="tools">
-                    <button class="icon-btn" type="button" onclick="copyText('resultID')" title="Copy to clipboard">📋</button>
+                    <div class="input-group">
+                        <label>5. Tujuan Utama Aplikasi</label>
+                        <textarea id="tujuan" class="input-field" placeholder="mencatat surat masuk/keluar dengan data rapi"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="input-column">
+                    <div class="input-group">
+                        <label>6. Pengguna Utama</label>
+                        <input id="penggunaUtama" type="text" placeholder="staf administrasi dan pimpinan">
+                    </div>
+
+                    <div class="input-group">
+                        <label>7. Daftar Field Data</label>
+                        <textarea id="field" class="input-field" placeholder="Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>8. Aturan Validasi</label>
+                        <textarea id="validasi" class="input-field" placeholder="nomor surat unik, status dropdown"></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>9. Standar Script (Multi-select)</label>
+                        <select id="standarScript" multiple size="4">
+                            <option value="PEP 8" selected>Python – PEP 8</option>
+                            <option value="PEP 257" selected>Python – PEP 257</option>
+                            <option value="JavaScript ES6">JavaScript – ES6</option>
+                            <option value="SQL Schema">SQL – Schema</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-
-        </div>
-
-
-        <div class="col-group">
-            
-            <div><label>6. Pengguna Utama</label>
-            <input id="penggunaUtama" placeholder="staf administrasi dan pimpinan"></div>
-
-            <div><label>7. Daftar Field Data</label>
-            <textarea id="field" class="input-field" placeholder="Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi"></textarea></div>
-
-            <div><label>8. Aturan Validasi</label>
-            <textarea id="validasi" class="input-field" placeholder="nomor surat unik, status dropdown"></textarea></div>
-            
-            <div><label>9. Standar Script (Multi-select)</label>
-            <select id="standarScript" multiple size="4">
-                <option value="PEP 8" selected>Python – PEP 8</option>
-                <option value="PEP 257" selected>Python – PEP 257</option>
-                <option value="JavaScript ES6">JavaScript – ES6</option>
-                <option value="SQL Schema">SQL – Schema</option>
-            </select>
-            </div>
-            
-            <div class="output-area">
-                <label for="resultEN">Prompt Final (English)</label>
-                <textarea id="resultEN" class="mono" rows="12" readonly placeholder="Output reference (read-only)"></textarea>
-                <div class="tools">
-                    <button class="icon-btn" type="button" onclick="copyText('resultEN')" title="Copy to clipboard">📋</button>
-                </div>
-            </div>
-
-        </div>
-    </form>
-
-    <div class="actions-bar">
-        <button type="button" class="primary" onclick="generatePrompt()">
+        </form>
+        
+        <button id="generate-button" type="button" onclick="generatePrompt()">
             🚀 Generate Prompt
         </button>
-        <button type="button" class="secondary" onclick="clearInputs()">
-            ❌ Clear Inputs
-        </button>
-    </div>
 
+        <div class="action-buttons">
+             <button type="button" class="secondary" onclick="clearInputs()">
+                ❌ Clear Inputs
+            </button>
+        </div>
+
+
+        <div class="output-container" id="output-section">
+            <h2 style="color: #007bff;">Output Prompt Final</h2>
+            <div class="output-grid">
+                
+                <div class="output-group">
+                    <label for="resultID">Prompt Final (Indonesia)</label>
+                    <textarea id="resultID" class="output-textarea mono final" readonly placeholder="Hasil akan muncul di sini..."></textarea>
+                    <div class="action-buttons">
+                        <button id="copy-button-id" type="button" onclick="copyText('resultID')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="output-group">
+                    <label for="resultEN">Prompt Final (English)</label>
+                    <textarea id="resultEN" class="output-textarea mono final" readonly placeholder="Output reference (read-only)"></textarea>
+                    <div class="action-buttons">
+                        <button id="copy-button-en" type="button" onclick="copyText('resultEN')">📋 Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div id="toast-notification"></div>
 
     <script src="script.js"></script>
