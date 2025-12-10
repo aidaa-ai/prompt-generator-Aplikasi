@@ -106,7 +106,7 @@ Buatkan rancangan tabel, kode/script lengkap, serta lampiran QA checklist untuk 
 
     // PROMPT FINAL ENGLISH (Disesuaikan)
     const promptEN = 
-        `You, as ${persona}, create the ${namaAplikasi} application based on ${platform}. 
+        `You as ${persona}, create the ${namaAplikasi} application based on ${platform}. 
 I work as a ${peranInstansi} and require this application. 
 The main goal is ${tujuan}. The main users are ${penggunaUtama}. 
 Use the fields: ${field}; validation rules: ${validasi}; 
