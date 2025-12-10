@@ -41,6 +41,34 @@ function clearInputs() {
     generatePrompt();
 }
 
+// Fungsi BARU: Mengunduh konten textarea sebagai file .txt
+function downloadText(id, filename) {
+    const el = document.getElementById(id);
+    const text = el.value;
+    
+    // Membuat Blob dengan tipe teks polos
+    const blob = new Blob([text], { type: 'text/plain' });
+    
+    // Membuat URL untuk Blob
+    const url = URL.createObjectURL(blob);
+    
+    // Membuat elemen link sementara
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename; // Nama file yang akan diunduh
+    
+    // Men-trigger klik otomatis
+    document.body.appendChild(a);
+    a.click();
+    
+    // Membersihkan URL Blob dan elemen link
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showToast(`💾 File '${filename}' berhasil diunduh!`);
+}
+
+
 // Generate prompt Indonesia & English
 function generatePrompt() {
     const getInputValue = (id) => {
