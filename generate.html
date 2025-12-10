@@ -1,275 +1,87 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Prompt Generator AI - Versi Ringkas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 30px auto; padding: 0 20px; color: #111; }
-    h1 { font-size: 22px; margin-bottom: 10px; }
-    
-    /* Form Container: 2 Kolom Seimbang */
-    form { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; /* 2 Kolom Seimbang */
-      gap: 20px; 
-      margin-bottom: 20px;
-    }
-    
-    /* Col-group: Kontainer untuk menampung semua field di kolom kiri dan kanan */
-    .col-group { 
-      display: flex; 
-      flex-direction: column; 
-      gap: 16px;
-    }
-
-    /* Styling Field Input dan Textarea */
-    label { font-weight: bold; margin-bottom: 6px; display: block; font-size: 14px; }
-    input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
-    
-    /* Tinggi Tetap untuk Textarea Input agar Seimbang */
-    textarea.input-field { 
-      min-height: 80px; 
-      resize: vertical;
-      max-height: 120px;
-    }
-
-    /* Tinggi Select (Dropdown) agar Seimbang (4 baris) */
-    #standarScript {
-      height: 100px;
-    }
-
-    /* Styling untuk 2 Textarea Output */
-    .output-area {
-      margin-top: 10px;
-      flex-grow: 1; 
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Ketinggian Textarea Output Disesuaikan */
-    .output-area textarea {
-      flex-grow: 1; 
-      min-height: 250px; 
-    }
-
-    /* Actions Button Bar: Mengambil lebar penuh (Di luar form) */
-    .actions-bar {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-      margin-bottom: 40px;
-    }
-
-    /* Button Styling */
-    button { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; }
-    .primary { background: #0ea5e9; color: #fff; display: flex; align-items: center; gap: 8px; }
-    .secondary { background: #ef4444; color: #fff; }
-
-    /* Tools Copy/Download */
-    .tools { margin-top: 6px; display: flex; gap: 10px; }
-    .icon-btn { cursor: pointer; font-size: 18px; border: none; background: none; }
-    .icon-btn:hover::after { content: attr(title); font-size: 12px; margin-left: 6px; color: #555; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace; }
-
-    /* Gaya Notifikasi Toast */
-    #toast-notification {
-      visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
-      border-radius: 6px; padding: 10px; position: fixed; z-index: 1; left: 50%; bottom: 30px;
-      transform: translateX(-50%); opacity: 0; transition: opacity 0.5s, visibility 0s 0.5s;
-    }
-    #toast-notification.show {
-      visibility: visible; opacity: 1; transition: opacity 0.5s, visibility 0s;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Prompt Generator AI - Aplikasi Ringkas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body onload="generatePrompt()">
-  <h1>✨ Prompt Generator AI - Aplikasi Ringkas</h1>
-  <p>Masukkan detail aplikasi Anda di bawah ini. Prompt akan dibuat sesuai struktur baru.</p>
+    <h1>✨ Prompt Generator AI - Aplikasi Ringkas</h1>
+    <p>Masukkan detail aplikasi Anda di bawah ini. Prompt akan dibuat sesuai struktur baru.</p>
 
-  <form id="promptForm">
-                <div class="col-group">
-      
-      <div><label>1. Persona</label>
-      <textarea id="persona" class="input-field" placeholder="programmer senior dan analis handal"></textarea></div>
+    <form id="promptForm">
+        <div class="col-group">
+            
+            <div><label>1. Persona</label>
+            <textarea id="persona" class="input-field" placeholder="programmer senior dan analis handal"></textarea></div>
 
-      <div><label>2. Nama Aplikasi</label>
-      <input id="namaAplikasi" placeholder="Register Surat"></div>
+            <div><label>2. Nama Aplikasi</label>
+            <input id="namaAplikasi" placeholder="Register Surat"></div>
 
-      <div><label>3. Platform</label>
-      <input id="platform" placeholder="Google Sheets"></div>
+            <div><label>3. Platform</label>
+            <input id="platform" placeholder="Google Sheets"></div>
 
-      <div><label>4. Peran/Instansi Pengguna</label>
-      <textarea id="peranInstansi" class="input-field" placeholder="staf administrasi di instansi pemerintah"></textarea></div>
+            <div><label>4. Peran/Instansi Pengguna</label>
+            <textarea id="peranInstansi" class="input-field" placeholder="staf administrasi di instansi pemerintah"></textarea></div>
 
-      <div><label>5. Tujuan Utama Aplikasi</label>
-      <textarea id="tujuan" class="input-field" placeholder="mencatat surat masuk/keluar dengan data rapi"></textarea></div>
-      
-            <div class="output-area">
-        <label for="resultID">Prompt Final (Indonesia)</label>
-        <textarea id="resultID" class="mono" rows="12" placeholder="Hasil akan muncul di sini..."></textarea>
-        <div class="tools">
-          <button class="icon-btn" onclick="copyText('resultID')" title="Copy to clipboard">📋</button>
-        </div>
-      </div>
+            <div><label>5. Tujuan Utama Aplikasi</label>
+            <textarea id="tujuan" class="input-field" placeholder="mencatat surat masuk/keluar dengan data rapi"></textarea></div>
+            
+            <div class="output-area">
+                <label for="resultID">Prompt Final (Indonesia)</label>
+                <textarea id="resultID" class="mono" rows="12" placeholder="Hasil akan muncul di sini..."></textarea>
+                <div class="tools">
+                    <button class="icon-btn" type="button" onclick="copyText('resultID')" title="Copy to clipboard">📋</button>
+                </div>
+            </div>
 
-    </div>
+        </div>
 
 
-                <div class="col-group">
-      
-      <div><label>6. Pengguna Utama</label>
-      <input id="penggunaUtama" placeholder="staf administrasi dan pimpinan"></div>
+        <div class="col-group">
+            
+            <div><label>6. Pengguna Utama</label>
+            <input id="penggunaUtama" placeholder="staf administrasi dan pimpinan"></div>
 
-      <div><label>7. Daftar Field Data</label>
-      <textarea id="field" class="input-field" placeholder="Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi"></textarea></div>
+            <div><label>7. Daftar Field Data</label>
+            <textarea id="field" class="input-field" placeholder="Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi"></textarea></div>
 
-      <div><label>8. Aturan Validasi</label>
-      <textarea id="validasi" class="input-field" placeholder="nomor surat unik, status dropdown"></textarea></div>
-      
-      <div><label>9. Standar Script (Multi-select)</label>
-      <select id="standarScript" multiple size="4">
-        <option value="PEP 8" selected>Python – PEP 8</option>
-        <option value="PEP 257" selected>Python – PEP 257</option>
-        <option value="JavaScript ES6">JavaScript – ES6</option>
-        <option value="SQL Schema">SQL – Schema</option>
-      </select>
-      </div>
-      
-            <div class="output-area">
-        <label for="resultEN">Prompt Final (English)</label>
-        <textarea id="resultEN" class="mono" rows="12" readonly placeholder="Output reference (read-only)"></textarea>
-        <div class="tools">
-          <button class="icon-btn" onclick="copyText('resultEN')" title="Copy to clipboard">📋</button>
-        </div>
-      </div>
+            <div><label>8. Aturan Validasi</label>
+            <textarea id="validasi" class="input-field" placeholder="nomor surat unik, status dropdown"></textarea></div>
+            
+            <div><label>9. Standar Script (Multi-select)</label>
+            <select id="standarScript" multiple size="4">
+                <option value="PEP 8" selected>Python – PEP 8</option>
+                <option value="PEP 257" selected>Python – PEP 257</option>
+                <option value="JavaScript ES6">JavaScript – ES6</option>
+                <option value="SQL Schema">SQL – Schema</option>
+            </select>
+            </div>
+            
+            <div class="output-area">
+                <label for="resultEN">Prompt Final (English)</label>
+                <textarea id="resultEN" class="mono" rows="12" readonly placeholder="Output reference (read-only)"></textarea>
+                <div class="tools">
+                    <button class="icon-btn" type="button" onclick="copyText('resultEN')" title="Copy to clipboard">📋</button>
+                </div>
+            </div>
 
-    </div>
-  </form>
+        </div>
+    </form>
 
-    <div class="actions-bar">
-    <button type="button" class="primary" onclick="generatePrompt()">
-      🚀 Generate Prompt
-    </button>
-    <button type="button" class="secondary" onclick="clearInputs()">
-      ❌ Clear Inputs
-    </button>
-  </div>
+    <div class="actions-bar">
+        <button type="button" class="primary" onclick="generatePrompt()">
+            🚀 Generate Prompt
+        </button>
+        <button type="button" class="secondary" onclick="clearInputs()">
+            ❌ Clear Inputs
+        </button>
+    </div>
 
-  
-    <div id="toast-notification"></div>
+    <div id="toast-notification"></div>
 
-  <script>
-    // Nilai default sesuai instruksi baru
-    const defaultValues = {
-      persona: "programmer senior dan analis handal",
-      namaAplikasi: "Register Surat",
-      platform: "Google Sheets",
-      peranInstansi: "staf administrasi di instansi pemerintah",
-      tujuan: "mencatat surat masuk/keluar dengan data rapi",
-      penggunaUtama: "staf administrasi dan pimpinan",
-      field: "Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi",
-      validasi: "nomor surat unik, status dropdown",
-      // Standar script diambil dari select, default PEP 8 & PEP 257
-    };
-
-    // Fungsi untuk menghapus semua input
-    function clearInputs() {
-      const form = document.getElementById('promptForm');
-      const inputs = form.querySelectorAll('input, textarea');
-      inputs.forEach(input => input.value = '');
-      const selects = form.querySelectorAll('select');
-      selects.forEach(select => {
-        Array.from(select.options).forEach(option => {
-          // Mengatur ulang default select (PEP 8 & PEP 257)
-          option.selected = (option.value === 'PEP 8' || option.value === 'PEP 257');
-        });
-      });
-      showToast("❌ Semua input telah dibersihkan!");
-      generatePrompt();
-    }
-
-    // Utility: tampilkan notifikasi toast
-    function showToast(message) {
-      const toast = document.getElementById("toast-notification");
-      toast.textContent = message;
-      toast.className = "show";
-      setTimeout(() => { 
-        toast.className = toast.className.replace("show", ""); 
-      }, 3000); 
-    }
-
-    // Utility: bersihkan input (trim whitespace)
-    function sanitize(s) {
-      return (s || "").trim();
-    }
-
-    // Generate prompt Indonesia & English
-    function generatePrompt() {
-      const getInputValue = (id) => {
-        const el = document.getElementById(id);
-        const sanitizedValue = sanitize(el.value);
-        return sanitizedValue || defaultValues[id] || "";
-      };
-
-      // Ambil Nilai dari Field
-      const persona = getInputValue('persona');
-      const namaAplikasi = getInputValue('namaAplikasi');
-      const platform = getInputValue('platform');
-      const peranInstansi = getInputValue('peranInstansi');
-      const tujuan = getInputValue('tujuan');
-      const penggunaUtama = getInputValue('penggunaUtama');
-      const field = getInputValue('field');
-      const validasi = getInputValue('validasi');
-      
-      // Multi-select standar script
-      const standarSelect = document.getElementById('standarScript');
-      const selectedStandards = Array.from(standarSelect.selectedOptions).map(opt => opt.value);
-      const standarScript = selectedStandards.join(", ");
-
-      // ----------------------------------------------------
-      // PROMPT FINAL INDONESIA (SESUAI STRUKTUR BARU)
-      // ----------------------------------------------------
-      const promptID = 
-        `Kamu sebagai ${persona}, buatkan aplikasi ${namaAplikasi} berbasis ${platform}. 
-Saya bekerja sebagai ${peranInstansi} dan membutuhkan aplikasi ini. 
-Tujuannya ${tujuan}. Pengguna utama adalah ${penggunaUtama}. 
-Gunakan field ${field}; validasi ${validasi}; 
-Pastikan penulisan script sesuai standar ${standarScript} sehingga memudahkan dokumentasi dan pengembangan. 
-Buatkan rancangan tabel, kode/script lengkap, serta lampiran QA checklist untuk memastikan kualitas akhir.`;
-
-      // ----------------------------------------------------
-      // PROMPT FINAL ENGLISH (Disesuaikan dengan struktur baru)
-      // ----------------------------------------------------
-      const promptEN = 
-        `You, as ${persona}, create the ${namaAplikasi} application based on ${platform}. 
-I work as a ${peranInstansi} and require this application. 
-The main goal is ${tujuan}. The main users are ${penggunaUtama}. 
-Use the fields: ${field}; validation rules: ${validasi}; 
-Ensure the script writing adheres to the ${standarScript} standards to facilitate documentation and development. 
-Provide a table design, the complete code/script, and an attached QA checklist to ensure final quality.`;
-
-      // Tampilkan hasil
-      document.getElementById('resultID').value = promptID.trim();
-      document.getElementById('resultEN').value = promptEN.trim();
-    }
-
-    // Copy to clipboard (Reusing existing script)
-    function copyText(id) {
-      const el = document.getElementById(id);
-      el.select();
-      el.setSelectionRange(0, el.value.length);
-      
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(el.value)
-          .then(() => showToast("📋 Teks berhasil disalin!"))
-          .catch(err => {
-            showToast("❌ Gagal menyalin. Silakan coba cara lama.");
-          });
-      } else {
-        showToast("❌ Gagal menyalin. Silakan salin manual.");
-      }
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
