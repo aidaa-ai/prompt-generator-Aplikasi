@@ -37,8 +37,14 @@ function clearInputs() {
             option.selected = (option.value === 'PEP 8' || option.value === 'PEP 257');
         });
     });
-    showToast("❌ Semua input telah dibersihkan!");
-    generatePrompt();
+    
+    // START PERUBAHAN: Membersihkan kedua Prompt Final
+    document.getElementById('resultID').value = '';
+    document.getElementById('resultEN').value = '';
+    // END PERUBAHAN
+    
+    showToast("❌ Semua input dan output telah dibersihkan!");
+    // generatePrompt() tidak perlu dipanggil di sini, karena tujuannya membersihkan.
 }
 
 // Fungsi BARU: Mengunduh konten textarea sebagai file .txt
