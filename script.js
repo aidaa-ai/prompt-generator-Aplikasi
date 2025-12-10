@@ -8,7 +8,6 @@ const defaultValues = {
     penggunaUtama: "staf administrasi dan pimpinan",
     field: "Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi",
     validasi: "nomor surat unik, status dropdown",
-    // Standar script diambil dari select, default PEP 8 & PEP 257
 };
 
 // Utility: tampilkan notifikasi toast
@@ -31,7 +30,7 @@ function clearInputs() {
     const form = document.getElementById('promptForm');
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => input.value = '');
-    const selects = form.querySelectorAll('select');
+    const selects = document.querySelectorAll('select');
     selects.forEach(select => {
         Array.from(select.options).forEach(option => {
             // Mengatur ulang default select (PEP 8 & PEP 257)
@@ -65,7 +64,7 @@ function generatePrompt() {
     const selectedStandards = Array.from(standarSelect.selectedOptions).map(opt => opt.value);
     const standarScript = selectedStandards.join(", ");
 
-    // PROMPT FINAL INDONESIA (SESUAI STRUKTUR BARU)
+    // PROMPT FINAL INDONESIA (SESUAI STRUKTUR)
     const promptID = 
         `Kamu sebagai ${persona}, buatkan aplikasi ${namaAplikasi} berbasis ${platform}. 
 Saya bekerja sebagai ${peranInstansi} dan membutuhkan aplikasi ini. 
@@ -74,7 +73,7 @@ Gunakan field ${field}; validasi ${validasi};
 Pastikan penulisan script sesuai standar ${standarScript} sehingga memudahkan dokumentasi dan pengembangan. 
 Buatkan rancangan tabel, kode/script lengkap, serta lampiran QA checklist untuk memastikan kualitas akhir.`;
 
-    // PROMPT FINAL ENGLISH (Disesuaikan dengan struktur baru)
+    // PROMPT FINAL ENGLISH (Disesuaikan)
     const promptEN = 
         `You, as ${persona}, create the ${namaAplikasi} application based on ${platform}. 
 I work as a ${peranInstansi} and require this application. 
