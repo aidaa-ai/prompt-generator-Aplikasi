@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Prompt Generator – Indonesia & English</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 30px auto; padding: 0 20px; color: #111; }
     h1 { font-size: 22px; margin-bottom: 10px; }
     form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .full { grid-column: 1 / -1; }
     label { font-weight: bold; margin-bottom: 6px; display: block; }
-    input, textarea, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+    input, textarea, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
     textarea { min-height: 80px; }
     .actions { grid-column: 1 / -1; margin-top: 10px; }
     button { padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
@@ -17,7 +18,7 @@
     .output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
     .output-box { display: flex; flex-direction: column; }
     .output-box label { font-weight: bold; margin-bottom: 6px; }
-    .mono { font-family: monospace; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace; }
     .tools { margin-top: 6px; display: flex; gap: 10px; }
     .icon-btn { cursor: pointer; font-size: 18px; border: none; background: none; }
     .icon-btn:hover::after { content: attr(title); font-size: 12px; margin-left: 6px; color: #555; }
@@ -25,17 +26,58 @@
 </head>
 <body>
   <h1>Prompt Generator – Indonesia & English</h1>
+
   <form id="promptForm">
-    <div class="full"><label>Persona</label><input id="persona" value="programmer senior dan analis handal"></div>
-    <div><label>Nama aplikasi</label><input id="namaAplikasi" value="Register Surat"></div>
-    <div><label>Platform</label><input id="platform" value="Google Sheets"></div>
-    <div class="full"><label>Peran/instansi pengguna</label><input id="peranInstansi" value="staf administrasi di instansi pemerintah"></div>
-    <div class="full"><label>Tujuan utama aplikasi</label><input id="tujuan" value="mencatat surat masuk/keluar dengan data rapi"></div>
-    <div class="full"><label>Pengguna utama</label><input id="penggunaUtama" value="staf administrasi dan pimpinan"></div>
-    <div class="full"><label>Daftar field</label><textarea id="field">Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi</textarea></div>
-    <div class="full"><label>Aturan validasi</label><textarea id="validasi">nomor surat unik, status dropdown</textarea></div>
-    <div class="full"><label>Daftar fitur</label><textarea id="fitur">form input, filter, pencarian cepat</textarea></div>
-    <div class="full"><label>Indikator dashboard</label><textarea id="dashboard">jumlah surat masuk/keluar per bulan, status keberadaan surat</textarea></div>
+    <div class="full">
+      <label>Persona</label>
+      <input id="persona" value="programmer senior dan analis handal">
+    </div>
+
+    <div>
+      <label>Nama aplikasi</label>
+      <input id="namaAplikasi" value="Register Surat">
+    </div>
+
+    <div>
+      <label>Platform</label>
+      <input id="platform" value="Google Sheets">
+    </div>
+
+    <div class="full">
+      <label>Peran/instansi pengguna</label>
+      <input id="peranInstansi" value="staf administrasi di instansi pemerintah">
+    </div>
+
+    <div class="full">
+      <label>Tujuan utama aplikasi</label>
+      <input id="tujuan" value="mencatat surat masuk/keluar dengan data rapi">
+    </div>
+
+    <div class="full">
+      <label>Pengguna utama</label>
+      <input id="penggunaUtama" value="staf administrasi dan pimpinan">
+    </div>
+
+    <div class="full">
+      <label>Daftar field</label>
+      <textarea id="field">Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi</textarea>
+    </div>
+
+    <div class="full">
+      <label>Aturan validasi</label>
+      <textarea id="validasi">nomor surat unik, status dropdown</textarea>
+    </div>
+
+    <div class="full">
+      <label>Daftar fitur</label>
+      <textarea id="fitur">form input, filter, pencarian cepat</textarea>
+    </div>
+
+    <div class="full">
+      <label>Indikator dashboard</label>
+      <textarea id="dashboard">jumlah surat masuk/keluar per bulan, status keberadaan surat</textarea>
+    </div>
+
     <div class="full">
       <label>Standar Script (multi-select)</label>
       <select id="standarScript" multiple size="6">
@@ -46,24 +88,29 @@
         <option value="Airbnb JS Style Guide">JavaScript – Airbnb</option>
         <option value="StandardJS">JavaScript – StandardJS</option>
       </select>
+      <div style="font-size:12px;color:#666;margin-top:6px;">Gunakan Ctrl/Command + klik untuk memilih lebih dari satu standar.</div>
     </div>
-    <div class="actions"><button type="button" class="primary" onclick="generatePrompt()">Generate Prompt</button></div>
+
+    <div class="actions">
+      <button type="button" class="primary" onclick="generatePrompt()">Generate Prompt</button>
+    </div>
   </form>
 
   <div class="output-grid">
-    <!-- Indonesia -->
+    <!-- Indonesia (editable) -->
     <div class="output-box">
-      <label>Prompt Final (Indonesia)</label>
-      <textarea id="resultID" class="mono" rows="14"></textarea>
+      <label for="resultID">Prompt Final (Indonesia)</label>
+      <textarea id="resultID" class="mono" rows="14" placeholder="Hasil akan muncul di sini..."></textarea>
       <div class="tools">
         <button class="icon-btn" onclick="copyText('resultID')" title="Copy to clipboard">📋</button>
         <button class="icon-btn" onclick="downloadText('resultID','Prompt_Indonesia.txt')" title="Download as .txt">💾</button>
       </div>
     </div>
-    <!-- English -->
+
+    <!-- English (read-only) -->
     <div class="output-box">
-      <label>Prompt Final (English)</label>
-      <textarea id="resultEN" class="mono" rows="14" readonly></textarea>
+      <label for="resultEN">Prompt Final (English)</label>
+      <textarea id="resultEN" class="mono" rows="14" readonly placeholder="Output reference (read-only)"></textarea>
       <div class="tools">
         <button class="icon-btn" onclick="copyText('resultEN')" title="Copy to clipboard">📋</button>
         <button class="icon-btn" onclick="downloadText('resultEN','Prompt_English.txt')" title="Download as .txt">💾</button>
@@ -72,11 +119,14 @@
   </div>
 
   <script>
-    // Utility: bersihkan input
-    function sanitize(s){ return (s||"").trim(); }
+    // Utility: bersihkan input (trim whitespace)
+    function sanitize(s) {
+      return (s || "").trim();
+    }
 
     // Generate prompt Indonesia & English
-    function generatePrompt(){
+    function generatePrompt() {
+      // Ambil input
       const persona = sanitize(document.getElementById('persona').value);
       const namaAplikasi = sanitize(document.getElementById('namaAplikasi').value);
       const platform = sanitize(document.getElementById('platform').value);
@@ -87,42 +137,67 @@
       const validasi = sanitize(document.getElementById('validasi').value);
       const fitur = sanitize(document.getElementById('fitur').value);
       const dashboard = sanitize(document.getElementById('dashboard').value);
+
+      // Multi-select standar script
       const standarSelect = document.getElementById('standarScript');
-      const selectedStandards = Array.from(standarSelect.selectedOptions).map(opt=>opt.value);
+      const selectedStandards = Array.from(standarSelect.selectedOptions).map(opt => opt.value);
       const standarScript = selectedStandards.join(", ");
 
-      const promptID = `Kamu sebagai ${persona}, buatkan aplikasi ${namaAplikasi} berbasis ${platform}. ` +
+      // Prompt Final (Indonesia)
+      const promptID =
+        `Kamu sebagai ${persona}, buatkan aplikasi ${namaAplikasi} berbasis ${platform}. ` +
         `Saya bekerja sebagai ${peranInstansi} dan membutuhkan aplikasi ini. ` +
-        `Tujuannya ${tujuan}. Pengguna utama adalah ${penggunaUtama}. ` +
-        `Gunakan field ${field}; validasi ${validasi}; sertakan fitur ${fitur}; ` +
-        `dashboard ${dashboard}. Pastikan penulisan script sesuai standar ${standarScript} ` +
-        `sehingga memudahkan dokumentasi dan pengembangan. Buatkan rancangan tabel, kode/script lengkap, serta lampiran QA checklist untuk memastikan kualitas akhir.`;
+        `Tujuannya ${tujuan}. ` +
+        `Pengguna utama adalah ${penggunaUtama}. ` +
+        `Gunakan field ${field}; ` +
+        `validasi ${validasi}; ` +
+        `sertakan fitur ${fitur}; ` +
+        `dashboard ${dashboard}. ` +
+        `Pastikan penulisan script sesuai standar ${standarScript} sehingga memudahkan dokumentasi dan pengembangan. ` +
+        `Buatkan rancangan tabel, kode/script lengkap, serta lampiran QA checklist untuk memastikan kualitas akhir.`;
 
-      const promptEN = `You, as ${persona}, create an application ${namaAplikasi} based on ${platform}. ` +
-        `I work as ${peranInstansi} and need this application. The purpose is: ${tujuan}. ` +
-        `Main users: ${penggunaUtama}. Use the following fields: ${field}; apply validation: ${validasi}; ` +
-        `include features: ${fitur}; dashboard indicators: ${dashboard}. Ensure that the script writing follows the standards of ${standarScript} ` +
-        `so that documentation and development are easier. Provide a complete table design, full code/script, and a QA checklist to guarantee final quality.`;
+      // Prompt Final (English) — struktur Inggris, input user dibiarkan apa adanya
+      const promptEN =
+        `You, as ${persona}, create an application ${namaAplikasi} based on ${platform}. ` +
+        `I work as ${peranInstansi} and need this application. ` +
+        `The purpose is: ${tujuan}. ` +
+        `Main users: ${penggunaUtama}. ` +
+        `Use the following fields: ${field}; ` +
+        `apply validation: ${validasi}; ` +
+        `include features: ${fitur}; ` +
+        `dashboard indicators: ${dashboard}. ` +
+        `Ensure that the script writing follows the standards of ${standarScript} so that documentation and development are easier. ` +
+        `Provide a complete table design, full code/script, and a QA checklist to guarantee final quality.`;
 
+      // Tampilkan hasil
       document.getElementById('resultID').value = promptID;
       document.getElementById('resultEN').value = promptEN;
     }
 
     // Copy to clipboard
-    function copyText(id){
+    function copyText(id) {
       const el = document.getElementById(id);
-      el.select(); el.setSelectionRange(0, el.value.length);
-      navigator.clipboard.writeText(el.value).then(()=>alert("Copied!"));
+      el.select();
+      el.setSelectionRange(0, el.value.length);
+      // Fallback execCommand + modern clipboard
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(el.value).then(() => alert("Copied to clipboard."));
+      } else {
+        document.execCommand('copy');
+        alert("Copied to clipboard.");
+      }
     }
 
-   function downloadText(id, filename){
-  const text = document.getElementById(id).value;
-  const blob = new Blob([text], {type: "text/plain"});
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  link.click(); // jalankan download
-}
-</script>
+    // Download as .txt
+    function downloadText(id, filename) {
+      const text = document.getElementById(id).value;
+      const blob = new Blob([text], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+  </script>
 </body>
 </html>
