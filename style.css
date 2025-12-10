@@ -75,18 +75,19 @@ textarea.input-field {
 
 
 /* BUTTONS */
+
 /* GAYA GRID BARU UNTUK TOMBOL UTAMA */
 .button-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 Kolom dengan lebar sama */
+    grid-template-columns: 1fr 1fr; /* Kunci utama: Membagi ruang sama besar */
     gap: 10px; 
-    margin-top: 20px; /* Tambahkan jarak dari input di atas */
+    margin-top: 20px;
     margin-bottom: 20px; 
 }
 
 /* Mengatur gaya tombol di dalam grid agar mengisi penuh kolom */
 .button-grid button {
-    width: 100%;
+    width: 100%; /* Mengisi penuh kolom grid 1fr */
     padding: 15px;
     border-radius: 5px;
     font-size: 1.1em;
@@ -96,14 +97,13 @@ textarea.input-field {
 }
 
 #generate-button {
-    background-color: #28a745;
+    background-color: #28a745; /* Ganti warna jika Anda ingin biru seperti gambar PIKF */
     color: white;
 }
 
 #generate-button:hover {
     background-color: #218838;
 }
-
 /* OUTPUT */
 .output-container.hidden {
     display: none;
