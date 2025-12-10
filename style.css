@@ -21,6 +21,7 @@ h1 {
     margin-bottom: 5px;
 }
 h2 {
+    color: #007bff;
     text-align: center;
     margin-top: 30px;
     margin-bottom: 20px;
@@ -122,12 +123,12 @@ textarea.input-field {
 
 .action-buttons {
     text-align: center;
-    margin-top: 10px; /* Mengurangi margin dari 20px */
+    margin-top: 10px; 
 }
 
 .action-buttons button {
     padding: 10px 20px;
-    margin: 0 5px; /* Mengurangi margin horizontal */
+    margin: 0 5px; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -138,15 +139,23 @@ textarea.input-field {
     background-color: #007bff;
     color: white;
 }
-.secondary { /* Untuk tombol Clear Inputs */
-    background-color: #6c757d;
+#download-button-id, #download-button-en {
+    background-color: #6c757d; /* Warna abu-abu untuk Download */
     color: white;
 }
-.secondary:hover {
+#download-button-id:hover, #download-button-en:hover {
     background-color: #5a6268;
 }
 
-/* Gaya Notifikasi Toast (Dipindahkan dari script.js) */
+.secondary { /* Untuk tombol Clear Inputs */
+    background-color: #dc3545; /* Merah untuk Clear/Delete */
+    color: white;
+}
+.secondary:hover {
+    background-color: #c82333;
+}
+
+/* Gaya Notifikasi Toast */
 #toast-notification {
     visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
     border-radius: 6px; padding: 10px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
