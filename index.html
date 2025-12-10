@@ -8,24 +8,42 @@
     body { font-family: Arial, sans-serif; max-width: 1000px; margin: 30px auto; padding: 0 20px; color: #111; }
     h1 { font-size: 22px; margin-bottom: 10px; }
     
-    /* SOLUSI: Mengatur form sebagai grid 2 kolom dan membiarkan setiap div input menjadi cell grid */
+    /* Form Container: 2 Kolom Seimbang */
     form { 
       display: grid; 
       grid-template-columns: 1fr 1fr; /* 2 Kolom Seimbang */
       gap: 16px; 
+      margin-bottom: 20px; /* Jarak antara Form dan Tombol */
     }
     
-    /* Kelas .full digunakan untuk baris yang tetap memerlukan lebar penuh (misalnya, tombol actions) */
-    .full { grid-column: 1 / -1; }
-    
+    /* col-group: Anak langsung dari form untuk menampung field */
+    .col-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 16px;
+    }
+
+    /* Actions Button: Sekarang di luar form */
+    .actions { 
+      margin-top: 10px;
+      margin-bottom: 20px; /* Jarak antara Tombol dan Output */
+      text-align: right; 
+    }
+
     label { font-weight: bold; margin-bottom: 6px; display: block; }
     input, textarea, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
     textarea { min-height: 80px; }
     
-    .actions { grid-column: 1 / -1; margin-top: 10px; text-align: right; }
     button { padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
     .primary { background: #0ea5e9; color: #fff; }
-    .output-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+    
+    /* Output Grid: Tetap 2 Kolom di Paling Bawah */
+    .output-grid { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 20px; 
+      margin-top: 20px; /* Jarak dari Tombol */
+    }
     .output-box { display: flex; flex-direction: column; }
     .output-box label { font-weight: bold; margin-bottom: 6px; }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -62,65 +80,70 @@
   <h1>Prompt Generator – Indonesia & English</h1>
 
   <form id="promptForm">
-        <div>
-      <label>Persona</label>
-      <input id="persona" placeholder="Contoh: programmer senior dan analis handal">
-    </div>
-        <div>
-      <label>Daftar field</label>
-      <textarea id="field" placeholder="Contoh: Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi"></textarea>
-    </div>
-        <div>
-      <label>Nama aplikasi</label>
-      <input id="namaAplikasi" placeholder="Contoh: Register Surat">
-    </div>
-        <div>
-      <label>Aturan validasi</label>
-      <textarea id="validasi" placeholder="Contoh: nomor surat unik, status dropdown"></textarea>
-    </div>
-        <div>
-      <label>Platform</label>
-      <input id="platform" placeholder="Contoh: Google Sheets">
+        <div class="col-group">
+      <div>
+        <label>Persona</label>
+        <input id="persona" placeholder="Contoh: programmer senior dan analis handal">
       </div>
-        <div>
-      <label>Daftar fitur</label>
-      <textarea id="fitur" placeholder="Contoh: form input, filter, pencarian cepat"></textarea>
+      <div>
+        <label>Nama aplikasi</label>
+        <input id="namaAplikasi" placeholder="Contoh: Register Surat">
+      </div>
+      <div>
+        <label>Platform</label>
+        <input id="platform" placeholder="Contoh: Google Sheets">
+      </div>
+      <div>
+        <label>Peran/instansi pengguna</label>
+        <input id="peranInstansi" placeholder="Contoh: staf administrasi di instansi pemerintah">
+      </div>
+      <div>
+        <label>Tujuan utama aplikasi</label>
+        <input id="tujuan" placeholder="Contoh: mencatat surat masuk/keluar dengan data rapi">
+      </div>
+      <div>
+        <label>Pengguna utama</label>
+        <input id="penggunaUtama" placeholder="Contoh: staf administrasi dan pimpinan">
+      </div>
     </div>
+
+        <div class="col-group">
+      <div>
+        <label>Daftar field</label>
+        <textarea id="field" placeholder="Contoh: Nomor surat, tanggal, pengirim, penerima, perihal, status, disposisi"></textarea>
+        </div>
         <div>
-      <label>Peran/instansi pengguna</label>
-      <input id="peranInstansi" placeholder="Contoh: staf administrasi di instansi pemerintah">
-    </div>
+          <label>Aturan validasi</label>
+          <textarea id="validasi" placeholder="Contoh: nomor surat unik, status dropdown"></textarea>
+        </div>
         <div>
-      <label>Indikator dashboard</label>
-      <textarea id="dashboard" placeholder="Contoh: jumlah surat masuk/keluar per bulan, status keberadaan surat"></textarea>
-    </div>
+          <label>Daftar fitur</label>
+          <textarea id="fitur" placeholder="Contoh: form input, filter, pencarian cepat"></textarea>
+        </div>
         <div>
-      <label>Tujuan utama aplikasi</label>
-      <input id="tujuan" placeholder="Contoh: mencatat surat masuk/keluar dengan data rapi">
-    </div>
+          <label>Indikator dashboard</label>
+          <textarea id="dashboard" placeholder="Contoh: jumlah surat masuk/keluar per bulan, status keberadaan surat"></textarea>
+        </div>
         <div>
-      <label>Standar Script (multi-select)</label>
-      <select id="standarScript" multiple size="6">
-        <option value="PEP 8">Python – PEP 8</option>
-        <option value="PEP 257">Python – PEP 257</option>
-        <option value="PEP 20">Python – PEP 20</option>
-        <option value="JavaScript ES6" selected>JavaScript – ES6</option>
-        <option value="Airbnb JS Style Guide">JavaScript – Airbnb</option>
-        <option value="StandardJS">JavaScript – StandardJS</option>
-      </select>
-      <div style="font-size:12px;color:#666;margin-top:6px;">Gunakan Ctrl/Command + klik untuk memilih lebih dari satu standar.</div>
-    </div>
-        <div>
-      <label>Pengguna utama</label>
-      <input id="penggunaUtama" placeholder="Contoh: staf administrasi dan pimpinan">
-    </div>
-        
-        <div class="actions full">
-      <button type="button" class="primary" onclick="generatePrompt()">Generate Prompt</button>
+          <label>Standar Script (multi-select)</label>
+          <select id="standarScript" multiple size="6">
+            <option value="PEP 8">Python – PEP 8</option>
+            <option value="PEP 257">Python – PEP 257</option>
+            <option value="PEP 20">Python – PEP 20</option>
+            <option value="JavaScript ES6" selected>JavaScript – ES6</option>
+            <option value="Airbnb JS Style Guide">JavaScript – Airbnb</option>
+            <option value="StandardJS">JavaScript – StandardJS</option>
+          </select>
+          <div style="font-size:12px;color:#666;margin-top:6px;">Gunakan Ctrl/Command + klik untuk memilih lebih dari satu standar.</div>
+        </div>
     </div>
   </form>
 
-  <div class="output-grid full">
+    <div class="actions">
+    <button type="button" class="primary" onclick="generatePrompt()">Generate Prompt</button>
+  </div>
+
+    <div class="output-grid">
         <div class="output-box">
       <label for="resultID">Prompt Final (Indonesia)</label>
       <textarea id="resultID" class="mono" rows="14" placeholder="Hasil akan muncul di sini..."></textarea>
@@ -143,7 +166,7 @@
     <div id="toast-notification"></div>
 
   <script>
-    // Nilai default yang sebelumnya ada di 'value' sekarang di simpan di sini 
+    // Nilai default dipindahkan ke sini
     const defaultValues = {
       persona: "programmer senior dan analis handal",
       namaAplikasi: "Register Surat",
