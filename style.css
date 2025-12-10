@@ -1,129 +1,168 @@
-body { 
-    font-family: Arial, sans-serif; 
-    max-width: 1000px; 
-    margin: 30px auto; 
-    padding: 0 20px; 
-    color: #111; 
-}
-h1 { 
-    font-size: 22px; 
-    margin-bottom: 10px; 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Form Container: 2 Kolom Seimbang (Menggunakan Grid) */
-form { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; /* 2 Kolom Seimbang */
-    gap: 20px; 
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 5px;
+}
+h2 {
+    text-align: center;
+    margin-top: 30px;
     margin-bottom: 20px;
 }
 
-/* Col-group: Kontainer untuk menampung semua field di kolom kiri dan kanan */
-.col-group { 
-    display: flex; 
-    flex-direction: column; 
+p {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* INPUT GRID */
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Memastikan setiap kolom input bertumpuk rapi dan mengisi ruangnya */
+.input-column {
+    display: flex;
+    flex-direction: column;
     gap: 16px;
 }
 
-/* Styling Field Input dan Textarea */
-label { 
-    font-weight: bold; 
-    margin-bottom: 6px; 
-    display: block; 
-    font-size: 14px; 
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
-input, textarea, select { 
-    width: 100%; 
-    padding: 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 6px; 
-    font-size: 14px; 
+
+input[type="text"], 
+textarea, 
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     box-sizing: border-box; 
+    font-size: 14px;
 }
 
-/* Tinggi Tetap untuk Textarea Input agar Seimbang */
-textarea.input-field { 
+/* Keseimbangan Tinggi Input/Textarea */
+textarea.input-field {
     min-height: 80px; 
-    resize: vertical;
-    max-height: 120px;
+    resize: vertical; 
 }
-
-/* Tinggi Select (Dropdown) agar Seimbang (4 baris) */
 #standarScript {
-    height: 100px;
+    height: 100px; /* Diatur agar rata dengan input-field */
 }
 
-/* Styling untuk 2 Textarea Output */
-.output-area {
-    margin-top: 10px;
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
+
+/* BUTTONS */
+#generate-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
 }
 
-/* Ketinggian Textarea Output Disesuaikan */
-.output-area textarea {
-    flex-grow: 1; 
-    min-height: 250px; 
+#generate-button:hover {
+    background-color: #218838;
 }
 
-/* Actions Button Bar: Mengambil lebar penuh (Di luar form) */
-.actions-bar {
-    display: flex;
-    justify-content: space-between;
+/* OUTPUT */
+.output-container.hidden {
+    display: none;
+}
+
+.output-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     margin-top: 20px;
-    margin-bottom: 40px;
 }
 
-/* Button Styling */
-button { 
-    padding: 12px 24px; 
-    border: none; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    font-size: 16px; 
-}
-.primary { 
-    background: #0ea5e9; 
-    color: #fff; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-}
-.secondary { 
-    background: #ef4444; 
-    color: #fff; 
+.output-textarea {
+    background-color: #f9f9f9;
+    min-height: 250px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 14px;
 }
 
-/* Tools Copy/Download */
-.tools { 
-    margin-top: 6px; 
-    display: flex; 
-    gap: 10px; 
-}
-.icon-btn { 
-    cursor: pointer; 
-    font-size: 18px; 
-    border: none; 
-    background: none; 
-}
-.icon-btn:hover::after { 
-    content: attr(title); 
-    font-size: 12px; 
-    margin-left: 6px; 
-    color: #555; 
-}
-.mono { 
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace; 
+.output-textarea.final {
+    background-color: #e9ecef; /* Warna berbeda untuk kolom non-editable */
 }
 
-/* Gaya Notifikasi Toast */
+.action-buttons {
+    text-align: center;
+    margin-top: 10px; /* Mengurangi margin dari 20px */
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    margin: 0 5px; /* Mengurangi margin horizontal */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#copy-button-id, #copy-button-en {
+    background-color: #007bff;
+    color: white;
+}
+.secondary { /* Untuk tombol Clear Inputs */
+    background-color: #6c757d;
+    color: white;
+}
+.secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Gaya Notifikasi Toast (Dipindahkan dari script.js) */
 #toast-notification {
     visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
-    border-radius: 6px; padding: 10px; position: fixed; z-index: 1; left: 50%; bottom: 30px;
+    border-radius: 6px; padding: 10px; position: fixed; z-index: 1000; left: 50%; bottom: 30px;
     transform: translateX(-50%); opacity: 0; transition: opacity 0.5s, visibility 0s 0.5s;
 }
 #toast-notification.show {
     visibility: visible; opacity: 1; transition: opacity 0.5s, visibility 0s;
+}
+
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .input-grid, .output-grid {
+        grid-template-columns: 1fr; /* Satu kolom di perangkat kecil */
+    }
+    .input-column {
+        gap: 10px; /* Kurangi gap pada mobile */
+    }
 }
