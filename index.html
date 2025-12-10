@@ -115,10 +115,11 @@
       navigator.clipboard.writeText(el.value).then(()=>alert("Copied!"));
     }
 
-    // Download as .txt
-    function downloadText(id, filename){
-      const text = document.getElementById(id).value;
-      const blob = new Blob([text], {type: "text/plain"});
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename
+   function downloadText(id, filename){
+  const text = document.getElementById(id).value;
+  const blob = new Blob([text], {type: "text/plain"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click(); // jalankan download
+}
